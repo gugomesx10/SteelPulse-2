@@ -76,7 +76,7 @@ interface Address {
   line2: string;
 }
 
-interface Doctor {
+export interface Doctor {
   _id: string;
   name: string;
   image: string;
@@ -86,6 +86,10 @@ interface Doctor {
   about: string;
   fees: number;
   address: Address;
+  available: boolean;
+  slots_booked?: {
+    [date: string]: string[];
+  };
 }
 
 export const doctors: Doctor[] = [
@@ -98,7 +102,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'O Dr. James tem um forte compromisso em oferecer cuidados médicos abrangentes, focando na medicina preventiva, diagnóstico precoce e estratégias de tratamento eficazes.',
     fees: 50,
-    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc2',
@@ -109,7 +114,8 @@ export const doctors: Doctor[] = [
     experience: '3 Anos',
     about: 'A Dra. Larson se dedica à medicina preventiva e ao cuidado das mulheres em todas as fases da vida.',
     fees: 60,
-    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc3',
@@ -120,7 +126,8 @@ export const doctors: Doctor[] = [
     experience: '1 Ano',
     about: 'A Dra. Patel foca na saúde da pele, tratando desde acne até condições mais complexas.',
     fees: 30,
-    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc4',
@@ -131,7 +138,8 @@ export const doctors: Doctor[] = [
     experience: '2 Anos',
     about: 'O Dr. Lee tem experiência em cuidados pediátricos, garantindo o bem-estar das crianças.',
     fees: 40,
-    address: { line1: '47th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '47th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc5',
@@ -142,7 +150,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'A Dra. Garcia é especializada em doenças neurológicas, com um foco em tratamentos inovadores.',
     fees: 50,
-    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc6',
@@ -153,7 +162,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'O Dr. Williams é especializado no tratamento de distúrbios neurológicos com métodos baseados em evidências.',
     fees: 50,
-    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc7',
@@ -164,7 +174,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'O Dr. Davis oferece cuidados médicos gerais, com foco na medicina preventiva e acompanhamento contínuo.',
     fees: 50,
-    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc8',
@@ -175,7 +186,8 @@ export const doctors: Doctor[] = [
     experience: '3 Anos',
     about: 'O Dr. White é especializado em ginecologia e saúde feminina, com um atendimento de alta qualidade.',
     fees: 60,
-    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc9',
@@ -186,7 +198,8 @@ export const doctors: Doctor[] = [
     experience: '1 Ano',
     about: 'A Dra. Mitchell é focada em cuidados dermatológicos de alta qualidade, desde problemas comuns até doenças graves.',
     fees: 30,
-    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc10',
@@ -197,7 +210,8 @@ export const doctors: Doctor[] = [
     experience: '2 Anos',
     about: 'O Dr. King é pediatra especializado no cuidado de crianças em diferentes fases de desenvolvimento.',
     fees: 40,
-    address: { line1: '47th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '47th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc11',
@@ -208,7 +222,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'A Dra. Kelly oferece tratamentos inovadores para distúrbios neurológicos com um foco em qualidade de vida.',
     fees: 50,
-    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc12',
@@ -219,7 +234,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'O Dr. Harris é especializado no diagnóstico e tratamento de condições neurológicas.',
     fees: 50,
-    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '57th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc13',
@@ -230,7 +246,8 @@ export const doctors: Doctor[] = [
     experience: '4 Anos',
     about: 'A Dra. Evans oferece cuidados gerais com um foco na medicina preventiva.',
     fees: 50,
-    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '17th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc14',
@@ -241,7 +258,8 @@ export const doctors: Doctor[] = [
     experience: '3 Anos',
     about: 'O Dr. Martinez é especialista em ginecologia e bem-estar feminino.',
     fees: 60,
-    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '27th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   },
   {
     _id: 'doc15',
@@ -252,6 +270,7 @@ export const doctors: Doctor[] = [
     experience: '1 Ano',
     about: 'A Dra. Hill oferece cuidados dermatológicos, com foco na saúde da pele e tratamentos eficazes.',
     fees: 30,
-    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' }
+    address: { line1: '37th Cross, Richmond', line2: 'Circle, Ring Road, Londres' },
+    available: true
   }
 ];

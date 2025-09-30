@@ -11,10 +11,10 @@ const About: React.FC = () => {
       <div className='my-10 flex flex-col md:flex-row gap-12'>
         <img className='w-full md:max-w-[360px]' src={assets.about_image} alt="Sobre a empresa" />
         <div className='flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-600'>
-          <p>Bem-vindo ao Prescripto, seu parceiro confiável para gerenciar suas necessidades de saúde de forma conveniente e eficiente. No Prescripto, entendemos os desafios que as pessoas enfrentam ao agendar consultas médicas e gerenciar seus registros de saúde.</p>
-          <p>Prescripto é comprometido com a excelência em tecnologia de saúde. Estamos sempre nos esforçando para melhorar nossa plataforma, integrando os mais recentes avanços para melhorar a experiência do usuário e fornecer um serviço superior. Seja agendando sua primeira consulta ou gerenciando o cuidado contínuo, o Prescripto está aqui para apoiá-lo em cada etapa do processo.</p>
+          <p>Bem-vindo ao SteelPulse, seu parceiro confiável para gerenciar suas necessidades de saúde de forma conveniente e eficiente. No SteelPulse, entendemos os desafios que as pessoas enfrentam ao agendar consultas médicas e gerenciar seus registros de saúde.</p>
+          <p>SteelPulse é comprometido com a excelência em tecnologia de saúde. Estamos sempre nos esforçando para melhorar nossa plataforma, integrando os mais recentes avanços para melhorar a experiência do usuário e fornecer um serviço superior. Seja agendando sua primeira consulta ou gerenciando o cuidado contínuo, o SteelPulse está aqui para apoiá-lo em cada etapa do processo.</p>
           <b className='text-gray-800'>Nossa Visão</b>
-          <p>A nossa visão no Prescripto é criar uma experiência de saúde sem interrupções para cada usuário. Nosso objetivo é preencher a lacuna entre pacientes e prestadores de cuidados de saúde, tornando mais fácil para você acessar o atendimento de que precisa, quando precisar.</p>
+          <p>A nossa visão no SteelPulse é criar uma experiência de saúde sem interrupções para cada usuário. Nosso objetivo é preencher a lacuna entre pacientes e prestadores de cuidados de saúde, tornando mais fácil para você acessar o atendimento de que precisa, quando precisar.</p>
         </div>
       </div>
 
