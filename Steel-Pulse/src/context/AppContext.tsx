@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState, ReactNode } from "react";
+import { createContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios';
 
@@ -49,7 +50,6 @@ const AppContextProvider: React.FC<AppContextProviderProps> = (props) => {
   const [token, setToken] = useState<string>(localStorage.getItem('token') || '');
   const [userData, setUserData] = useState<UserData | false>(false);
 
-  // Obtendo dados dos médicos via API
   const getDoctosData = async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/doctor/list`);
@@ -60,15 +60,17 @@ const AppContextProvider: React.FC<AppContextProviderProps> = (props) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      if (typeof error === "object" && error !== null && "message" in error) {
+        toast.error((error as { message: string }).message);
+      } else {
+        toast.error("Ocorreu um erro desconhecido.");
+      }
     }
   };
 
-  // Obtendo dados do perfil do usuário via API
   const loadUserProfileData = async () => {
     try {
       const { data } = await axios.get(`${backendUrl}/api/user/get-profile`, { headers: { token } });
-
       if (data.success) {
         setUserData(data.userData);
       } else {
@@ -76,7 +78,11 @@ const AppContextProvider: React.FC<AppContextProviderProps> = (props) => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      if (typeof error === "object" && error !== null && "message" in error) {
+        toast.error((error as { message: string }).message);
+      } else {
+        toast.error("Ocorreu um erro desconhecido.");
+      }
     }
   };
 

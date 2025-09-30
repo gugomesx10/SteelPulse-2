@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../context/AppContext';
+import { AppContext } from '../../context/AppContext';
 
 interface Doctor {
   _id: string;
@@ -10,6 +10,11 @@ interface Doctor {
   available: boolean;
 }
 
+interface AppContextType {
+  doctors: Doctor[];
+  
+}
+
 interface RelatedDoctorsProps {
   speciality: string;
   docId: string;
@@ -17,7 +22,8 @@ interface RelatedDoctorsProps {
 
 const RelatedDoctors: React.FC<RelatedDoctorsProps> = ({ speciality, docId }) => {
     const navigate = useNavigate();
-    const { doctors } = useContext(AppContext);
+    const context = useContext(AppContext) as AppContextType | undefined;
+    const doctors = context?.doctors ?? [];
 
     const [relDoc, setRelDoc] = useState<Doctor[]>([]);
 
@@ -38,7 +44,8 @@ const RelatedDoctors: React.FC<RelatedDoctorsProps> = ({ speciality, docId }) =>
                         <img className='bg-[#EAEFFF]' src={item.image} alt={item.name} />
                         <div className='p-4'>
                             <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
-                                <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Disponível' : "Indisponível"}</p>
+                                <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p>
+                                <p>{item.available ? 'Disponível' : "Indisponível"}</p>
                             </div>
                             <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
                             <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>
