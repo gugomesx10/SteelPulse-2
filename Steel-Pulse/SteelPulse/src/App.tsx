@@ -1,20 +1,20 @@
-import React from 'react'
-import Navbar from './components/Navbar'
-import { Routes, Route } from 'react-router-dom'
-import Home from './pages/Home'
-import Doctors from './pages/Doctors'
-import Login from './pages/Login'
-import About from './pages/About'
-import Contact from './pages/Contact'
-import Appointment from './pages/Appointment'
-import MyAppointments from './pages/MyAppointments'
-import MyProfile from './pages/MyProfile'
-import Footer from './components/Footer'
+import React from 'react';
+import Navbar from './components/Navbar/Navbar';
+import { Routes, Route } from 'react-router-dom';
+import Home from './/routes/Home/Home';
+import Doctors from './routes/Doctors/Doctors';
+import Login from './routes/Login/Login';
+import About from './routes/About/About';
+import Contact from './routes/Contact/Contact';
+import Appointment from './routes/Appointment/Appointment';
+import MyAppointments from './routes/MyAppointments/MyAppointments';
+import MyProfile from './routes/MyProfile/MyProfile';
+import Footer from './components/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Verify from './pages/Verify'
+import Verify from './routes/Verify/Verify';
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className='mx-4 sm:mx-[10%]'>
       <ToastContainer />
@@ -33,7 +33,7 @@ const App = () => {
       </Routes>
       <Footer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
