@@ -3,15 +3,22 @@ import type { ReactNode } from "react";
 import { toast } from "react-toastify";
 import axios from 'axios';
 
-interface Doctor {
+export interface Doctor {
   _id: string;
   name: string;
   speciality: string;
   image: string;
   available: boolean;
+  degree: string;
+  experience: string;
+  about: string;
+  fees: number;
+  slots_booked: {
+    [date: string]: string[];
+  }
 }
 
-interface UserData {
+export interface UserData {
   name: string;
   email: string;
   phone: string;
@@ -24,7 +31,7 @@ interface UserData {
   image: string;
 }
 
-interface AppContextType {
+export interface AppContextType {
   doctors: Doctor[];
   getDoctosData: () => void;
   currencySymbol: string;
@@ -96,7 +103,7 @@ const AppContextProvider: React.FC<AppContextProviderProps> = (props) => {
     }
   }, [token]);
 
-  const value = {
+  const value: AppContextType = {
     doctors,
     getDoctosData,
     currencySymbol,

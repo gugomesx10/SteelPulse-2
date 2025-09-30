@@ -1,38 +1,50 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
+import type { AppContextType } from '../../context/AppContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
-  const [state, setState] = useState('Cadastrar');
+  const [state, setState] = useState<'Cadastrar' | 'Login'>('Cadastrar');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
-  const { backendUrl, token, setToken } = useContext(AppContext);
+  const context = useContext(AppContext) as AppContextType | undefined;
+  const backendUrl = context?.backendUrl ?? '';
+  const token = context?.token ?? '';
+  const setToken = context?.setToken;
 
   const onSubmitHandler = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (state === 'Cadastrar') {
-      const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password });
+    try {
+      if (state === 'Cadastrar') {
+        const { data } = await axios.post(backendUrl + '/api/user/register', { name, email, password });
 
-      if (data.success) {
-        localStorage.setItem('token', data.token);
-        setToken(data.token);
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          setToken && setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
       } else {
-        toast.error(data.message);
+        const { data } = await axios.post(backendUrl + '/api/user/login', { email, password });
+
+        if (data.success) {
+          localStorage.setItem('token', data.token);
+          setToken && setToken(data.token);
+        } else {
+          toast.error(data.message);
+        }
       }
-    } else {
-      const { data } = await axios.post(backendUrl + '/api/user/login', { email, password });
-
-      if (data.success) {
-        localStorage.setItem('token', data.token);
-        setToken(data.token);
+    } catch (error) {
+      if (typeof error === "object" && error !== null && "message" in error) {
+        toast.error((error as { message: string }).message);
       } else {
-        toast.error(data.message);
+        toast.error("Ocorreu um erro desconhecido.");
       }
     }
   };
@@ -41,7 +53,7 @@ const Login: React.FC = () => {
     if (token) {
       navigate('/');
     }
-  }, [token]);
+  }, [token, navigate]);
 
   return (
     <form onSubmit={onSubmitHandler} className='min-h-[80vh] flex items-center'>

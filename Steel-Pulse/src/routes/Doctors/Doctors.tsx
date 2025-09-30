@@ -1,15 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/AppContext';
+import type { Doctor, AppContextType } from '../../context/AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const Doctors: React.FC = () => {
   const { speciality } = useParams();
 
-  const [filterDoc, setFilterDoc] = useState([]);
+  const [filterDoc, setFilterDoc] = useState<Doctor[]>([]);
   const [showFilter, setShowFilter] = useState(false);
   const navigate = useNavigate();
 
-  const { doctors } = useContext(AppContext);
+  const context = useContext(AppContext) as AppContextType | undefined;
+  const doctors: Doctor[] = context?.doctors ?? [];
 
   const applyFilter = () => {
     if (speciality) {
