@@ -8,23 +8,36 @@ const MyProfile: React.FC = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [image, setImage] = useState<File | null>(null);
 
-  const { token, backendUrl, userData, setUserData, loadUserProfileData } = useContext(AppContext);
+  const context = useContext(AppContext);
+  const token = context?.token ?? '';
+  const backendUrl = context?.backendUrl ?? '';
+  const userData = context?.userData;
+  const setUserData = context?.setUserData;
+  const loadUserProfileData = context?.loadUserProfileData;
+
+  useEffect(() => {
+    if (loadUserProfileData) {
+      loadUserProfileData();
+    }
+  }, [loadUserProfileData]);
 
   const updateUserProfileData = async () => {
     try {
       const formData = new FormData();
-      formData.append('name', userData.name);
-      formData.append('phone', userData.phone);
-      formData.append('address', JSON.stringify(userData.address));
-      formData.append('gender', userData.gender);
-      formData.append('dob', userData.dob);
-      if (image) formData.append('image', image);
+      if (userData) {
+        formData.append('name', userData.name);
+        formData.append('phone', userData.phone);
+        formData.append('address', JSON.stringify(userData.address));
+        formData.append('gender', userData.gender);
+        formData.append('dob', userData.dob);
+        if (image) formData.append('image', image);
+      }
 
       const { data } = await axios.post(backendUrl + '/api/user/update-profile', formData, { headers: { token } });
 
       if (data.success) {
         toast.success(data.message);
-        await loadUserProfileData();
+        if (loadUserProfileData) await loadUserProfileData();
         setIsEdit(false);
         setImage(null);
       } else {
@@ -32,7 +45,11 @@ const MyProfile: React.FC = () => {
       }
     } catch (error) {
       console.log(error);
-      toast.error(error.message);
+      if (typeof error === "object" && error !== null && "message" in error) {
+        toast.error((error as { message: string }).message);
+      } else {
+        toast.error("Ocorreu um erro desconhecido.");
+      }
     }
   };
 
@@ -51,7 +68,19 @@ const MyProfile: React.FC = () => {
       )}
 
       {isEdit ? (
-        <input className='bg-gray-50 text-3xl font-medium max-w-60' type="text" onChange={(e) => setUserData(prev => ({ ...prev, name: e.target.value }))} value={userData.name} />
+        <input
+          className='bg-gray-50 text-3xl font-medium max-w-60'
+          type="text"
+          onChange={(e) =>
+            setUserData &&
+            setUserData(prev =>
+              prev && typeof prev !== "boolean"
+                ? { ...prev, name: e.target.value }
+                : prev
+            )
+          }
+          value={userData.name}
+        />
       ) : (
         <p className='font-medium text-3xl text-[#262626] mt-4'>{userData.name}</p>
       )}
@@ -64,20 +93,53 @@ const MyProfile: React.FC = () => {
           <p className='font-medium'>Email:</p>
           <p className='text-blue-500'>{userData.email}</p>
           <p className='font-medium'>Telefone:</p>
-
           {isEdit ? (
-            <input className='bg-gray-50 max-w-52' type="text" onChange={(e) => setUserData(prev => ({ ...prev, phone: e.target.value }))} value={userData.phone} />
+            <input
+              className='bg-gray-50 max-w-52'
+              type="text"
+              onChange={(e) =>
+                setUserData &&
+                setUserData(prev =>
+                  prev && typeof prev !== "boolean"
+                    ? { ...prev, phone: e.target.value }
+                    : prev
+                )
+              }
+              value={userData.phone}
+            />
           ) : (
             <p className='text-blue-500'>{userData.phone}</p>
           )}
-
           <p className='font-medium'>Endereço:</p>
-
           {isEdit ? (
             <p>
-              <input className='bg-gray-50' type="text" onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line1: e.target.value } }))} value={userData.address.line1} />
+              <input
+                className='bg-gray-50'
+                type="text"
+                onChange={(e) =>
+                  setUserData &&
+                  setUserData(prev =>
+                    prev && typeof prev !== "boolean"
+                      ? { ...prev, address: { ...prev.address, line1: e.target.value } }
+                      : prev
+                  )
+                }
+                value={userData.address.line1}
+              />
               <br />
-              <input className='bg-gray-50' type="text" onChange={(e) => setUserData(prev => ({ ...prev, address: { ...prev.address, line2: e.target.value } }))} value={userData.address.line2} />
+              <input
+                className='bg-gray-50'
+                type="text"
+                onChange={(e) =>
+                  setUserData &&
+                  setUserData(prev =>
+                    prev && typeof prev !== "boolean"
+                      ? { ...prev, address: { ...prev.address, line2: e.target.value } }
+                      : prev
+                  )
+                }
+                value={userData.address.line2}
+              />
             </p>
           ) : (
             <p className='text-gray-500'>{userData.address.line1} <br /> {userData.address.line2}</p>
@@ -89,9 +151,19 @@ const MyProfile: React.FC = () => {
         <p className='text-[#797979] underline mt-3'>INFORMAÇÕES BÁSICAS</p>
         <div className='grid grid-cols-[1fr_3fr] gap-y-2.5 mt-3 text-gray-600'>
           <p className='font-medium'>Gênero:</p>
-
           {isEdit ? (
-            <select className='max-w-20 bg-gray-50' onChange={(e) => setUserData(prev => ({ ...prev, gender: e.target.value }))} value={userData.gender}>
+            <select
+              className='max-w-20 bg-gray-50'
+              onChange={(e) =>
+                setUserData &&
+                setUserData(prev =>
+                  prev && typeof prev !== "boolean"
+                    ? { ...prev, gender: e.target.value }
+                    : prev
+                )
+              }
+              value={userData.gender}
+            >
               <option value="Not Selected">Não Selecionado</option>
               <option value="Male">Masculino</option>
               <option value="Female">Feminino</option>
@@ -99,11 +171,21 @@ const MyProfile: React.FC = () => {
           ) : (
             <p className='text-gray-500'>{userData.gender}</p>
           )}
-
           <p className='font-medium'>Data de nascimento:</p>
-
           {isEdit ? (
-            <input className='max-w-28 bg-gray-50' type='date' onChange={(e) => setUserData(prev => ({ ...prev, dob: e.target.value }))} value={userData.dob} />
+            <input
+              className='max-w-28 bg-gray-50'
+              type='date'
+              onChange={(e) =>
+                setUserData &&
+                setUserData(prev =>
+                  prev && typeof prev !== "boolean"
+                    ? { ...prev, dob: e.target.value }
+                    : prev
+                )
+              }
+              value={userData.dob}
+            />
           ) : (
             <p className='text-gray-500'>{userData.dob}</p>
           )}
