@@ -1,8 +1,0 @@
-.link {
-    text-decoration: none;
-    color: var(--preto);
-}
-
-.link:hover {
-    transform: scale(1.1);
-}
