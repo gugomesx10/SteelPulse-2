@@ -1,6 +1,7 @@
 import React from 'react';
 import { assets } from '../../assets/assets';
 
+
 const Contact: React.FC = () => {
   return (
     <div>
@@ -14,7 +15,7 @@ const Contact: React.FC = () => {
           <p className='font-semibold text-lg text-gray-600'>NOSSO ESCRITÓRIO</p>
           <p className='text-gray-500'>São Paulo <br />  Av. Paulista, 1106 - 7º andar - Bela Vista, São Paulo - SP, 01311-000</p>
           <p className='text-gray-500'>Tel: (55) 9999-9999 <br /> Email: rm555999@fiap.com</p>
-          <p className='font-semibold text-lg text-gray-600'>CARREIRAS NO SteelPulse</p>
+          <p className='font-semibold text-lg text-gray-600'>CARREIRAS NO STEELPULSE</p>
           <p className='text-gray-500'>Saiba mais sobre nossas equipes e oportunidades de trabalho.</p>
           <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500'>Explorar Vagas</button>
         </div>

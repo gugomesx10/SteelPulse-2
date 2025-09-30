@@ -11,6 +11,7 @@ const Banner: React.FC = () => {
             {/* ------- Lado Esquerdo ------- */}
             <div className='flex-1 py-8 sm:py-10 md:py-16 lg:py-24 lg:pl-5'>
                 <div className='text-xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold text-white'>
+                <button className='bg-white text-sm sm:text-base text-[#595959] px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all'>Agendar Consulta</button>
                     <p>Agendar Consulta</p>
                     <p className='mt-4'>Com mais de 100 médicos de confiança</p>
                 </div>
