@@ -1,16 +1,29 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { AppContext } from '../../context/AppContext'
-import { useNavigate, useParams } from 'react-router-dom'
+
+import { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../context/AppContext';
+import { useNavigate, useParams } from 'react-router-dom';
+
+interface Doctor {
+  _id: string;
+  name: string;
+  speciality: string;
+  image: string;
+  available?: boolean;
+}
+
+interface AppContextType {
+  doctors: Doctor[];
+}
 
 const Doctors = () => {
 
   const { speciality } = useParams()
 
-  const [filterDoc, setFilterDoc] = useState([])
+  const [filterDoc, setFilterDoc] = useState<Doctor[]>([]);
   const [showFilter, setShowFilter] = useState(false)
   const navigate = useNavigate();
 
-  const { doctors } = useContext(AppContext)
+  const { doctors } = useContext(AppContext) as AppContextType;
 
   const applyFilter = () => {
     if (speciality) {
@@ -26,7 +39,7 @@ const Doctors = () => {
 
   return (
     <div>
-      <p className='text-gray-600'>Browse through the doctors specialist.</p>
+  <p className='text-gray-600'>Navegue pelos médicos especialistas.</p>
       <div className='flex flex-col sm:flex-row items-start gap-5 mt-5'>
         <button onClick={() => setShowFilter(!showFilter)} className={`py-1 px-3 border rounded text-sm  transition-all sm:hidden ${showFilter ? 'bg-primary text-white' : ''}`}>Filters</button>
         <div className={`flex-col gap-4 text-sm text-gray-600 ${showFilter ? 'flex' : 'hidden sm:flex'}`}>
@@ -43,7 +56,8 @@ const Doctors = () => {
               <img className='bg-[#EAEFFF]' src={item.image} alt="" />
               <div className='p-4'>
                 <div className={`flex items-center gap-2 text-sm text-center ${item.available ? 'text-green-500' : "text-gray-500"}`}>
-                  <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p><p>{item.available ? 'Available' : "Not Available"}</p>
+                  <p className={`w-2 h-2 rounded-full ${item.available ? 'bg-green-500' : "bg-gray-500"}`}></p>
+                  <p>{item.available ? 'Disponível' : 'Indisponível'}</p>
                 </div>
                 <p className='text-[#262626] text-lg font-medium'>{item.name}</p>
                 <p className='text-[#5C5C5C] text-sm'>{item.speciality}</p>

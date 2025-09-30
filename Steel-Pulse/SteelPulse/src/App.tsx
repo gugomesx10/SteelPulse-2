@@ -7,7 +7,7 @@ import Login from './routes/Login/Login';
 import About from './routes/About/About';
 import Contact from './routes/Contact/Contact';
 import Appointment from './routes/Appointment/Appointment';
-import MyAppointments from './routes/MyAppointments/MyAppointments';
+import MyAppointments from './routes/Myappointments/MyAppointments';
 import MyProfile from './routes/MyProfile/MyProfile';
 import Footer from './components/Footer/Footer';
 import { ToastContainer } from 'react-toastify';
