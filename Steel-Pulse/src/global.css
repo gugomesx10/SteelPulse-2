@@ -1,29 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 @import "tailwindcss";
 
-:root {
-  scroll-behavior: smooth;
+* {
+    font-family: Outfit;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f4f7fb;
-  color: #333;
+.active hr {
+    @apply block
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
+@media (max-width:740px) {
+    .active  p{
+       @apply text-white bg-primary
+    }
 }
 
-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(38, 143, 255, 0.5);
+::-webkit-scrollbar {
+    @apply hidden
 }
 
-input, textarea {
-  transition: all 0.2s ease-in-out;
-}
 
-input:focus, textarea:focus {
-  border-color: #ffcc00;
-  box-shadow: 0 0 3px rgba(255, 204, 0, 0.5);
-}
