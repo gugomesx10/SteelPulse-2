@@ -15,22 +15,16 @@ interface Doctor {
   experience?: string;
   about?: string;
   fees?: number;
-  slots_booked: {
+  slots_booked?: {
     [date: string]: string[];
   };
 }
 
-interface AppContextType {
-  doctors: Doctor[];
-  currencySymbol: string;
-  backendUrl: string;
-  token: string;
-  getDoctosData: () => void;
-}
-
 const Appointment = () => {
   const { docId } = useParams<{ docId: string }>();
-  const { doctors, currencySymbol, backendUrl, token, getDoctosData } = useContext(AppContext) as AppContextType;
+  const appContext = useContext(AppContext);
+  if (!appContext) return null;
+  const { doctors, currencySymbol, backendUrl, token } = appContext;
   const daysOfWeek = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SAB'];
 
   const [docInfo, setDocInfo] = useState<Doctor | null>(null);
@@ -42,7 +36,7 @@ const Appointment = () => {
   useEffect(() => {
     if (doctors.length > 0) {
       const foundDoc = doctors.find((doc) => doc._id === docId);
-      setDocInfo(foundDoc || null);
+      setDocInfo(foundDoc ? { ...foundDoc, slots_booked: (foundDoc as any).slots_booked || {} } : null);
     }
   }, [doctors, docId]);
 
@@ -71,7 +65,7 @@ const Appointment = () => {
         let year = currentDate.getFullYear();
         const slotDate = day + '_' + month + '_' + year;
         const slotTime = formattedTime;
-        const isSlotAvailable = !docInfo.slots_booked[slotDate] || !docInfo.slots_booked[slotDate].includes(slotTime);
+        const isSlotAvailable = !docInfo.slots_booked || !docInfo.slots_booked[slotDate] || !docInfo.slots_booked[slotDate].includes(slotTime);
         if (isSlotAvailable) {
           timeSlots.push({
             datetime: new Date(currentDate),
@@ -106,7 +100,6 @@ const Appointment = () => {
       );
       if (data.success) {
         toast.success(data.message);
-        getDoctosData();
         navigate('/my-appointments');
       } else {
         toast.error(data.message);
