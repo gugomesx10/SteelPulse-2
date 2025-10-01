@@ -16,21 +16,9 @@ Utiliza React + TypeScript, Vite, Tailwind CSS e Context API para garantir perfo
 
 ## Tecnologias
 - React 19 + TypeScript
-- Vite
-- Tailwind CSS
-- Context API
-- Axios
-- React Router
-- React Toastify
+ Menu interativo no topo: ao clicar na foto de perfil, você pode visualizar informações do desenvolvedor, acessar o GitHub e fechar o menu.
 
 ## Instalação
-1. Clone o repositório:
-   ```
-   git clone <https://github.com/gugomesx10/SteelPulse-2.git>
-   ```
-2. Acesse a pasta do projeto:
-   ```
-   cd SteelPulse/SteelPulse
    ```
 3. Instale as dependências:
    ```
@@ -51,7 +39,6 @@ Utiliza React + TypeScript, Vite, Tailwind CSS e Context API para garantir perfo
 ```
 SteelPulse/
   src/
-    assets/        # Imagens e ícones
     components/    # Componentes reutilizáveis
     context/       # Contexto global
     routes/        # Páginas do sistema
@@ -73,9 +60,6 @@ MIT
       reactDom.configs.recommended,
     ],
     languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
       },
       // other options...
     },
