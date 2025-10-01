@@ -13,7 +13,12 @@ const Banner = () => {
                         <p>Agende sua Consulta</p>
                         <p className='mt-4'>Com mais de 100 médicos de confiança</p>
                     </div>
-                    <button onClick={() => { navigate('/login'); scrollTo(0, 0) }} className='bg-white text-sm sm:text-base text-[#595959] px-8 py-3 rounded-full mt-6 hover:scale-105 transition-all '>Criar conta</button>
+                    <button
+                        onClick={() => { navigate('/login'); scrollTo(0, 0) }}
+                        className='bg-gradient-to-r from-primary to-blue-400 text-white text-sm sm:text-base px-8 py-3 rounded-full mt-6 shadow-lg font-semibold tracking-wide transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-primary hover:shadow-xl hover:ring-2 hover:ring-blue-200 focus:outline-none focus:ring-2 focus:ring-primary'
+                    >
+                        Criar conta
+                    </button>
                 </div>
                 {/* ------- Lado Direito ------- */}
                 <div className='hidden md:block md:w-1/2 lg:w-[370px] relative'>

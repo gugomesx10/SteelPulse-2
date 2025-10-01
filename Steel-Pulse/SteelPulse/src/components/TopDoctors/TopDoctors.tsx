@@ -33,7 +33,12 @@ const TopDoctors = () => {
                     </div>
                 ))}
             </div>
-            <button onClick={() => { navigate('/doctors'); scrollTo(0, 0) }} className='bg-[#EAEFFF] text-gray-600 px-12 py-3 rounded-full mt-10'>ver mais</button>
+            <button
+                onClick={() => { navigate('/doctors'); scrollTo(0, 0) }}
+                className='bg-gradient-to-r from-blue-400 to-blue-600 text-white px-12 py-3 rounded-full mt-10 shadow-lg font-semibold tracking-wide transition-all duration-300 hover:scale-105 hover:from-blue-500 hover:to-blue-700 hover:shadow-xl hover:ring-2 hover:ring-blue-200 focus:outline-none focus:ring-2 focus:ring-primary'
+            >
+                ver mais
+            </button>
         </div>
     )
 }

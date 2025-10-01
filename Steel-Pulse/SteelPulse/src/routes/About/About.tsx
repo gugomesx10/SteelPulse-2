@@ -20,15 +20,15 @@ const About: React.FC = () => {
         <p>POR QUE <span className='text-gray-700 font-semibold'>ESCOLHER A GENTE</span></p>
       </div>
       <div className='flex flex-col md:flex-row mb-20'>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
+        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] rounded-2xl shadow-lg bg-gradient-to-r from-primary/10 to-blue-100 hover:from-primary hover:to-blue-400 hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
           <b>EFICIÊNCIA:</b>
           <p>Agendamento de consultas de forma rápida e prática para o seu dia a dia.</p>
         </div>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
+        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] rounded-2xl shadow-lg bg-gradient-to-r from-primary/10 to-blue-100 hover:from-primary hover:to-blue-400 hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
           <b>CONVENIÊNCIA:</b>
           <p>Acesso a uma rede de profissionais de saúde confiáveis na sua região.</p>
         </div>
-        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] hover:bg-primary hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
+        <div className='border px-10 md:px-16 py-8 sm:py-16 flex flex-col gap-5 text-[15px] rounded-2xl shadow-lg bg-gradient-to-r from-primary/10 to-blue-100 hover:from-primary hover:to-blue-400 hover:text-white transition-all duration-300 text-gray-600 cursor-pointer'>
           <b>PERSONALIZAÇÃO:</b>
           <p>Recomendações e lembretes personalizados para ajudar você a cuidar da sua saúde.</p>
         </div>
